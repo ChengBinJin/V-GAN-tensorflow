@@ -374,7 +374,8 @@ class CGAN(object):
             conv5 = tf.nn.relu(conv5, name='conv5_relu2')
 
             # output layer: (N, 10, 10, 512) -> (N, 1, 1, 512) -> (N, 1)
-            gap = tf.layers.average_pooling2d(inputs=conv5, pool_size=10, strides=1, padding='VALID',
+            shape = conv5.get_shape().as_list()
+            gap = tf.layers.average_pooling2d(inputs=conv5, pool_size=shape[1], strides=1, padding='VALID',
                                               name='global_vaerage_pool')
             gap_flatten = tf.reshape(gap, [-1, 16*self.dis_c])
             output = tf_utils.linear(gap_flatten, 1, name='linear_output')
