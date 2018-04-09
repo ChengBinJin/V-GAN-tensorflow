@@ -12,14 +12,16 @@ FLAGS = tf.flags.FLAGS
 tf.flags.DEFINE_integer('train_interval', 1, 'training interval between discriminator and generator, default: 1')
 tf.flags.DEFINE_integer('ratio_gan2seg', 10, 'ratio of gan loss to seg loss, default: 10')
 tf.flags.DEFINE_string('gpu_index', '0', 'gpu index, default: 0')
-tf.flags.DEFINE_string('discriminator', 'image', 'type of discriminator [pixel|patch1|patch2|image], default: image')
+tf.flags.DEFINE_string('discriminator', 'image', 'type of discriminator [pixel|patch1|patch2|image], '
+                                                 'default: image')
+
 tf.flags.DEFINE_integer('batch_size', 1, 'batch size, default: 1')
 tf.flags.DEFINE_string('dataset', 'STARE', 'dataset name [DRIVE|STARE], default: STARE')
 tf.flags.DEFINE_bool('is_test', False, 'default: False (train)')
 
 tf.flags.DEFINE_float('learning_rate', 2e-4, 'initial learning rate for Adam, default: 2e-4')
 tf.flags.DEFINE_float('beta1', 0.5, 'momentum term of adam, default: 0.5')
-tf.flags.DEFINE_integer('iters', 30000, 'number of iteratons, default: 30000')
+tf.flags.DEFINE_integer('iters', 50000, 'number of iteratons, default: 50000')
 tf.flags.DEFINE_integer('print_freq', 100, 'print frequency, default: 100')
 tf.flags.DEFINE_integer('eval_freq', 500, 'evaluation frequency, default: 500')
 tf.flags.DEFINE_integer('sample_freq', 200, 'sample frequency, default: 200')

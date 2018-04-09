@@ -61,8 +61,9 @@ class Dataset(object):
 
     def train_next_batch(self, batch_size):
         train_indices = np.random.choice(self.num_train, batch_size, replace=True)
-        train_imgs, train_vessels = utils.get_train_batch(self.train_img_files, self.train_vessel_files,
-                                                          train_indices.astype(np.int32), img_size=self.image_size)
+        train_imgs, train_vessels = utils.get_train_batch(
+            self.train_img_files, self.train_vessel_files, train_indices.astype(np.int32),
+            img_size=self.image_size)
         train_vessels = np.expand_dims(train_vessels, axis=3)
 
         return train_imgs, train_vessels

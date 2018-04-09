@@ -21,7 +21,7 @@ class CGAN(object):
         self._build_net()
         self._init_assign_op()  # initialize assign operations
 
-        print('Initialize CGAN SUCCESS!\n')
+        print('Initialized CGAN SUCCESS!\n')
 
     def _build_net(self):
         self.X = tf.placeholder(tf.float32, shape=[None, *self.image_size, 3], name='image')
