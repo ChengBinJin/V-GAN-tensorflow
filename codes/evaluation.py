@@ -51,11 +51,12 @@ for dataset in datasets:
                 filenames = utils.all_files_under(result)
                 if not os.path.isdir(vessels_dir):
                     os.makedirs(vessels_dir)
+
                 for index in range(gt_vessels.shape[0]):
 
                     thresholded_vessel = utils.threshold_by_otsu(
                         np.expand_dims(pred_vessels[index, ...], axis=0),
-                        np.expand_dims(masks[index, ...], axis=0), flatten=False) * 255
+                        np.expand_dims(masks[index, ...], axis=0), flatten=False)*255
 
                     ori_imgs[index, ...][np.squeeze(thresholded_vessel, axis=0) == 0] = (0, 0, 0)
 
@@ -64,7 +65,6 @@ for dataset in datasets:
 
                 # compare with the ground truth
                 comp_dir = comparison_out.format(os.path.basename(dataset), os.path.basename(result))
-
                 if not os.path.isdir(comp_dir):
                     os.makedirs(comp_dir)
 
@@ -83,8 +83,9 @@ for dataset in datasets:
             # skip the ground truth
             if "1st_manual" not in result:
                 # print metrics
-                print("-- {} --\n".format(os.path.basename(result)))
-                print("dice coefficient : {:.4f}\n".format(utils.dice_coefficient(gt_vessels, pred_vessels, masks)))
+                print("-- {} --".format(os.path.basename(result)))
+                print("dice coefficient : {:.4f}".format(
+                    utils.dice_coefficient(gt_vessels, pred_vessels, masks)))
                 print("f1 score : {:.4f},\naccuracy : {:.4f},\nsensitivity : {:.4f},\nspecificity : {:.4f}\n"
                       .format(*utils.misc_measures_evaluation(gt_vessels, pred_vessels, masks)))
 

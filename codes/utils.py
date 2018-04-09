@@ -497,9 +497,12 @@ def plot_AUC_ROC(fprs, tprs, method_names, fig_dir, op_pts):
     matplotlib.rc('font', **font)
 
     # sort the order of plots manually for eye-pleasing plots
-    colors = ['r', 'b', 'y', 'g', '#7e7e7e', 'm', 'c', 'k', '#cd919e'] if len(fprs) == 9 \
+    # colors = ['r', 'b', 'y', 'g', '#7e7e7e', 'm', 'c', 'k', '#cd919e'] if len(fprs) == 9 \
+    #     else ['r', 'y', 'm', 'g', 'k']
+    # indices = [7, 2, 5, 3, 4, 6, 1, 8, 0] if len(fprs) == 9 else [4, 1, 2, 3, 0]
+    colors = ['r', 'b', 'y', 'g', '#7e7e7e', 'm', 'c', 'k'] if len(fprs) == 8 \
         else ['r', 'y', 'm', 'g', 'k']
-    indices = [7, 2, 5, 3, 4, 6, 1, 8, 0] if len(fprs) == 9 else [4, 1, 2, 3, 0]
+    indices = [7, 2, 5, 3, 4, 6, 1, 0] if len(fprs) == 8 else [4, 1, 2, 3, 0]
 
     # print auc
     print("****** ROC AUC ******")
@@ -541,9 +544,12 @@ def plot_AUC_PR(precisions, recalls, method_names, fig_dir, op_pts):
     matplotlib.rc('font', **font)
 
     # sort the order of plots manually for eye-pleasing plots
-    colors = ['r', 'b', 'y', 'g', '#7e7e7e', 'm', 'c', 'k', '#cd919e'] if len(precisions) == 9 \
+    # colors = ['r', 'b', 'y', 'g', '#7e7e7e', 'm', 'c', 'k', '#cd919e'] if len(precisions) == 9 \
+    #     else ['r', 'y', 'm', 'g', 'k']
+    # indices = [7, 2, 5, 3, 4, 6, 1, 8, 0] if len(precisions) == 9 else [4, 1, 2, 3, 0]
+    colors = ['r', 'b', 'y', 'g', '#7e7e7e', 'm', 'c', 'k'] if len(precisions) == 8 \
         else ['r', 'y', 'm', 'g', 'k']
-    indices = [7, 2, 5, 3, 4, 6, 1, 8, 0] if len(precisions) == 9 else [4, 1, 2, 3, 0]
+    indices = [7, 2, 5, 3, 4, 6, 1, 0] if len(precisions) == 8 else [4, 1, 2, 3, 0]
 
     # print auc
     print("****** Precision Recall AUC ******")

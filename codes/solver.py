@@ -129,10 +129,10 @@ class Solver(object):
         x_imgs_norm = x_imgs_norm.astype(np.uint8)
 
         # gray scale to color scale
-        samples = np.stack((samples, samples, samples), axis=3)
+        samples_3 = np.stack((samples, samples, samples), axis=3)
         y_imgs = np.stack((y_imgs, y_imgs, y_imgs), axis=3)
 
-        imgs = [x_imgs_norm, samples, y_imgs]
+        imgs = [x_imgs_norm, samples_3, y_imgs]
         for col_index in range(len(imgs)):
             for row_index in range(x_imgs.shape[0]):
                 ax = plt.subplot(gs[row_index * 3 + col_index])
@@ -152,7 +152,7 @@ class Solver(object):
                 self.dataset.test_img_files[idx[0]])[:-4])), bbox_inches='tight')
             plt.close(fig)
             # save
-            Image.fromarray(np.squeeze(samples*255.).astype(np.uint8)).save(os.path.join(
+            Image.fromarray(np.squeeze(samples*255).astype(np.uint8)).save(os.path.join(
                 save_file, '{}.png'.format(os.path.basename(self.dataset.test_img_files[idx[0]][:-4]))))
 
     def print_info(self, iter_time, name, loss):
