@@ -80,4 +80,30 @@ python main.py --is_test=True --discriminator=[pixel|patch1|patch2|image] --batc
 
 ## Evaluation
 
+## Architectures
+- **Generator:**
+<p align="right">
+  <img src="https://user-images.githubusercontent.com/37034031/38475926-038a1b64-3be6-11e8-98c7-4b4fbc8d140f.png" height="549" width="748">  
+</p>  
+
+- **Discriminator(Pixel):**
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/37034031/38475809-6975ae08-3be5-11e8-921b-f9e9481fd1b9.png" height="188" width="309">
+</p>
+
+- **Discriminator(Patch-1):**
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/37034031/38476155-36b2a19a-3be7-11e8-8a43-45bb1255c7c3.png" height="598" width="303">
+</p>
+
+- **Discriminator(Patch-2):**
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/37034031/38476206-7ef270ca-3be7-11e8-82f3-65b98a214c3a.png" height="399" width="304">
+</p>
+
+- **Discriminator(Image):**
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/37034031/38476272-caaa2440-3be7-11e8-9b8c-124741d109e8.png" height="600" width="305">
+</p>
+
 ## Improvements
