@@ -62,7 +62,7 @@ class CGAN(object):
         self.gen_optim = tf.group(*gen_ops)
 
     def _init_assign_op(self):
-        self.best_dic_coeff_placeholder = tf.placeholder(tf.float32, name='best_dic_coeff_placeholder')
+        self.best_auc_sum_placeholder = tf.placeholder(tf.float32, name='best_auc_sum_placeholder')
         self.auc_pr_placeholder = tf.placeholder(tf.float32, name='auc_pr_placeholder')
         self.auc_roc_placeholder = tf.placeholder(tf.float32, name='auc_roc_placeholder')
         self.dice_coeff_placeholder = tf.placeholder(tf.float32, name='dice_coeff_placeholder')
@@ -71,7 +71,7 @@ class CGAN(object):
         self.specificity_placeholder = tf.placeholder(tf.float32, name='specificity_placeholder')
         self.score_placeholder = tf.placeholder(tf.float32, name='score_placeholder')
 
-        self.best_dic_coeff = tf.Variable(0., trainable=False, dtype=tf.float32, name='best_dic_coeff')
+        self.best_auc_sum = tf.Variable(0., trainable=False, dtype=tf.float32, name='best_auc_sum')
         auc_pr = tf.Variable(0., trainable=False, dtype=tf.float32, name='auc_pr')
         auc_roc = tf.Variable(0., trainable=False, dtype=tf.float32, name='auc_roc')
         dice_coeff = tf.Variable(0., trainable=False, dtype=tf.float32, name='dice_coeff')
@@ -80,7 +80,7 @@ class CGAN(object):
         specificity = tf.Variable(0., trainable=False, dtype=tf.float32, name='specificity')
         score = tf.Variable(0., trainable=False, dtype=tf.float32, name='score')
 
-        self.best_dic_coeff_assign_op = self.best_dic_coeff.assign(self.best_dic_coeff_placeholder)
+        self.best_auc_sum_assign_op = self.best_auc_sum.assign(self.best_auc_sum_placeholder)
         auc_pr_assign_op = auc_pr.assign(self.auc_pr_placeholder)
         auc_roc_assign_op = auc_roc.assign(self.auc_roc_placeholder)
         dice_coeff_assign_op = dice_coeff.assign(self.dice_coeff_placeholder)
@@ -410,8 +410,8 @@ class CGAN(object):
         summary = self.sess.run(self.measure_summary)
         self.writer.add_summary(summary, iter_time)
 
-    def best_dic_coeff_assign(self, dic_coeff):
-        self.sess.run(self.best_dic_coeff_assign_op, feed_dict={self.best_dic_coeff_placeholder: dic_coeff})
+    def best_auc_sum_assign(self, auc_sum):
+        self.sess.run(self.best_auc_sum_assign_op, feed_dict={self.best_auc_sum_placeholder: auc_sum})
 
     def sample_imgs(self, x_data):
         return self.sess.run(self.g_samples, feed_dict={self.X: x_data})

@@ -29,7 +29,7 @@ class Solver(object):
         self.dataset = Dataset(self.flags.dataset, self.flags)
         self.model = CGAN(self.sess, self.flags, self.dataset.image_size)
 
-        self.best_dice_coeff = 0.
+        self.best_auc_sum = 0.
         self._make_folders()
 
         self.saver = tf.train.Saver()
@@ -77,10 +77,10 @@ class Solver(object):
                 g_loss = self.model.train_gen(x_imgs, y_imgs)
                 self.print_info(iter_time + iter_, 'g_loss', g_loss)
 
-            dic_coeff = self.eval(iter_time, phase='train')
+            auc_sum = self.eval(iter_time, phase='train')
 
-            if self.best_dice_coeff < dic_coeff:
-                self.best_dice_coeff = dic_coeff
+            if self.best_auc_sum < auc_sum:
+                self.best_auc_sum = auc_sum
                 self.save_model(iter_time)
 
     def test(self):
@@ -168,7 +168,7 @@ class Solver(object):
             utils.print_metrics(iter_time, ord_output)
 
     def eval(self, iter_time=0, phase='train'):
-        total_time, dic_coeff = 0., 0.
+        total_time, auc_sum = 0., 0.
         if np.mod(iter_time, self.flags.eval_freq) == 0:
             num_data, imgs, vessels, masks = None, None, None, None
             if phase == 'train':
@@ -196,7 +196,7 @@ class Solver(object):
 
             generated = np.asarray(generated)
             # calculate measurements
-            dic_coeff = self.measure(generated, vessels, masks, num_data, iter_time, phase, total_time)
+            auc_sum = self.measure(generated, vessels, masks, num_data, iter_time, phase, total_time)
 
             if phase == 'test':
                 # save test images
@@ -213,7 +213,7 @@ class Solver(object):
                               np.expand_dims(vessels_[idx], axis=0),
                               'test', idx=[idx], save_file=self.img_out_dir, phase='test')
 
-        return dic_coeff
+        return auc_sum
 
     def measure(self, generated, vessels, masks, num_data, iter_time, phase, total_time):
         # masking
@@ -233,12 +233,15 @@ class Solver(object):
         acc, sensitivity, specificity = utils.misc_measures(vessels_in_mask, binarys_in_mask)
         score = auc_pr + auc_roc + dice_coeff + acc + sensitivity + specificity
 
+        # auc_sum for saving best model in training
+        auc_sum = auc_roc + auc_pr
+
         # print information
         ord_output = collections.OrderedDict([('auc_pr', auc_pr), ('auc_roc', auc_roc),
                                               ('dice_coeff', dice_coeff), ('acc', acc),
                                               ('sensitivity', sensitivity), ('specificity', specificity),
-                                              ('score', score), ('best_dice_coeff', self.best_dice_coeff),
-                                              ('avg_pt', avg_pt)])
+                                              ('score', score), ('auc_sum', auc_sum),
+                                              ('best_auc_sum', self.best_auc_sum), ('avg_pt', avg_pt)])
         utils.print_metrics(iter_time, ord_output)
 
         # write in tensorboard when in train mode only
@@ -251,17 +254,17 @@ class Solver(object):
                            os.path.join(self.auc_out_dir, "auc_roc.npy"),
                            os.path.join(self.auc_out_dir, "auc_pr.npy"))
 
-        return dice_coeff
+        return auc_sum
 
     def save_model(self, iter_time):
-        self.model.best_dic_coeff_assign(self.best_dice_coeff)
+        self.model.best_auc_sum_assign(self.best_auc_sum)
 
-        model_name = "iter_{}_dic_coeff_{:.3}".format(iter_time, self.best_dice_coeff)
+        model_name = "iter_{}_auc_sum_{:.3}".format(iter_time, self.best_auc_sum)
         self.saver.save(self.sess, os.path.join(self.model_out_dir, model_name))
 
         print('===================================================')
         print('                     Model saved!                  ')
-        print(' Best dic_coeff: {:.3}'.format(self.best_dice_coeff))
+        print(' Best auc_sum: {:.3}'.format(self.best_auc_sum))
         print('===================================================\n')
 
     def load_model(self):
@@ -272,10 +275,10 @@ class Solver(object):
             ckpt_name = os.path.basename(ckpt.model_checkpoint_path)
             self.saver.restore(self.sess, os.path.join(self.model_out_dir, ckpt_name))
 
-            self.best_dice_coeff = self.sess.run(self.model.best_dic_coeff)
+            self.best_auc_sum = self.sess.run(self.model.best_auc_sum)
             print('====================================================')
             print('                     Model saved!                   ')
-            print(' Best dice_coeff: {:.3}'.format(self.best_dice_coeff))
+            print(' Best auc_sum: {:.3}'.format(self.best_auc_sum))
             print('====================================================')
 
             return True

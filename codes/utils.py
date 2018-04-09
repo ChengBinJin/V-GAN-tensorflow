@@ -159,7 +159,7 @@ def get_val_imgs(img_files, vessel_files, mask_files, img_size):
     all_vessel_imgs.append(flipped_vessels)
     all_mask_imgs.append(flipped_masks)
 
-    for angle in range(3, 360, 3):  # rotated imgs (3, 360, 3)
+    for angle in range(3, 360, 90):  # rotated imgs (3, 360, 3)
         print("Val data augmentation {} degree...".format(angle))
         all_fundus_imgs.append(random_perturbation(rotate(fundus_imgs, angle, axes=(1, 2), reshape=False,
                                                           order=1)))
