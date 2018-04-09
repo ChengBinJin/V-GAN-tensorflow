@@ -136,6 +136,7 @@ def get_val_imgs(img_files, vessel_files, mask_files, img_size):
     fundus_imgs = imagefiles2arrs(img_files)
     vessel_imgs = imagefiles2arrs(vessel_files) / 255
     mask_imgs = imagefiles2arrs(mask_files) / 255
+
     # padding
     fundus_imgs = pad_imgs(fundus_imgs, img_size)
     vessel_imgs = pad_imgs(vessel_imgs, img_size)
@@ -497,9 +498,6 @@ def plot_AUC_ROC(fprs, tprs, method_names, fig_dir, op_pts):
     matplotlib.rc('font', **font)
 
     # sort the order of plots manually for eye-pleasing plots
-    # colors = ['r', 'b', 'y', 'g', '#7e7e7e', 'm', 'c', 'k', '#cd919e'] if len(fprs) == 9 \
-    #     else ['r', 'y', 'm', 'g', 'k']
-    # indices = [7, 2, 5, 3, 4, 6, 1, 8, 0] if len(fprs) == 9 else [4, 1, 2, 3, 0]
     colors = ['r', 'b', 'y', 'g', '#7e7e7e', 'm', 'c', 'k'] if len(fprs) == 8 \
         else ['r', 'y', 'm', 'g', 'k']
     indices = [7, 2, 5, 3, 4, 6, 1, 0] if len(fprs) == 8 else [4, 1, 2, 3, 0]
@@ -544,9 +542,6 @@ def plot_AUC_PR(precisions, recalls, method_names, fig_dir, op_pts):
     matplotlib.rc('font', **font)
 
     # sort the order of plots manually for eye-pleasing plots
-    # colors = ['r', 'b', 'y', 'g', '#7e7e7e', 'm', 'c', 'k', '#cd919e'] if len(precisions) == 9 \
-    #     else ['r', 'y', 'm', 'g', 'k']
-    # indices = [7, 2, 5, 3, 4, 6, 1, 8, 0] if len(precisions) == 9 else [4, 1, 2, 3, 0]
     colors = ['r', 'b', 'y', 'g', '#7e7e7e', 'm', 'c', 'k'] if len(precisions) == 8 \
         else ['r', 'y', 'm', 'g', 'k']
     indices = [7, 2, 5, 3, 4, 6, 1, 0] if len(precisions) == 8 else [4, 1, 2, 3, 0]

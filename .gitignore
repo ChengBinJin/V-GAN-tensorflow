@@ -2,3 +2,7 @@ data/
 evaluation/
 codes/.idea/
 codes/STARE/
+codes/DRIVE/
+codes/__pycache__/
+results/
+images/

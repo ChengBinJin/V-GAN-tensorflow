@@ -13,7 +13,7 @@ def linear(input_, output_size, stddev=0.02, bias_start=0.0, with_w=False, name=
     # print('shape: ', shape)
 
     with tf.variable_scope(name) as scope:
-        matrix = tf.get_variable(name="Matrix", shape=[shape[1], output_size],
+        matrix = tf.get_variable(name="matrix", shape=[shape[1], output_size],
                                  dtype=tf.float32, initializer=tf.contrib.layers.xavier_initializer())
         bias = tf.get_variable(name="bias", shape=[output_size],
                                initializer=tf.constant_initializer(bias_start))
@@ -116,3 +116,4 @@ def print_activations(t):
 def show_all_variables():
     model_vars = tf.trainable_variables()
     slim.model_analyzer.analyze_vars(model_vars, print_info=True)
+
