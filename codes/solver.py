@@ -38,6 +38,11 @@ class Solver(object):
         tf_utils.show_all_variables()
 
     def _make_folders(self):
+        self.model_out_dir = "{}/model_{}_{}_{}".format(self.flags.dataset, self.flags.discriminator,
+                                                        self.flags.train_interval, self.flags.batch_size)
+        if not os.path.isdir(self.model_out_dir):
+            os.makedirs(self.model_out_dir)
+
         if self.flags.is_test:
             self.img_out_dir = "{}/seg_result_{}_{}_{}".format(self.flags.dataset,
                                                                self.flags.discriminator,
@@ -52,12 +57,8 @@ class Solver(object):
                 os.makedirs(self.auc_out_dir)
 
         elif not self.flags.is_test:
-            self.model_out_dir = "{}/model_{}_{}_{}".format(self.flags.dataset, self.flags.discriminator,
-                                                            self.flags.train_interval, self.flags.batch_size)
             self.sample_out_dir = "{}/sample_{}_{}_{}".format(self.flags.dataset, self.flags.discriminator,
                                                               self.flags.train_interval, self.flags.batch_size)
-            if not os.path.isdir(self.model_out_dir):
-                os.makedirs(self.model_out_dir)
             if not os.path.isdir(self.sample_out_dir):
                 os.makedirs(self.sample_out_dir)
 
