@@ -3,7 +3,7 @@ This repository is Tensorflow implementation of [Retinal Vessel Segmentation in 
 
 ![figure01](https://user-images.githubusercontent.com/37034031/38225319-55f0c47c-372f-11e8-839d-a544b06edfc0.png)
 
-## Improvements compared to Keras code
+## Improvements Compared to Keras Code
 1. Data augmentation is changed from off-line to online process, it solved memory limitation problem but it will slow down the training
 2. Add train_interval FLAGS to control training iterations between generator and discriminator, for normal GAN train_interval is 1
 3. The best model is saved based on the sum of the AUC_PR and AUC_ROC on validation data
@@ -89,7 +89,7 @@ python main.py --is_test=True --discriminator=[pixel|patch1|patch2|image] --batc
 
 ## Evaluation
 
-## Sampled images in training process
+## Sampled Images in Training Process
 **From left to right: fundoscopic image, predicted vessel, and gold standard**
 ![28400_222](https://user-images.githubusercontent.com/37034031/38590460-414827c0-3d6c-11e8-8ba8-6ffb8e6982da.png)  
 ![25000_193](https://user-images.githubusercontent.com/37034031/38590518-9dea9918-3d6c-11e8-9f6a-52041e9595db.png)
