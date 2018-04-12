@@ -88,6 +88,42 @@ python main.py --is_test=True --discriminator=[pixel|patch1|patch2|image] --batc
 - Make sure model already trained with defined dataset, discriminator, training interval, and batch size.
 
 ## Evaluation
+**Note:** Copy predicted vessel images to the ./results/\[DRIVE|STARE\]/V-GAN folder  
+```
+python evaluation.py
+```
+### DRIVE dataset
+| train_interval |         Model       | AUC_ROC | AUC_PR | Dice_coeff |
+|      :---:     |         :---:       |  :---:  |  :---: |   :---:    |
+|        1       |       Pixel GAN     | 0.9049  | 0.8033 |   0.3020   |
+|        1       | Patch GAN-1 (10x10) | 0.9487  | 0.8431 |   0.7469   |
+|        1       | Patch GAN-2 (80x80) | 0.9408  | 0.8257 |   0.7478   |
+|        1       |       Image GAN     | 0.9280  | 0.8241 |   0.7839   |
+|        100     |       Pixel GAN     |         |        |            |
+|        100     | Patch GAN-1 (10x10) |         |        |            |
+|        100     | patch GAN-2 (80x80) |         |        |            |
+|        100     |       Image GAN     |         |        |            |
+|        10000   |       Pixel GAN     |         |        |            |
+|        10000   | Patch GAN-1 (10x10) |         |        |            |
+|        10000   | patch GAN-2 (80x80) |         |        |            |
+|        10000   |       Image GAN     |         |        |            |
+
+### STARE dataset
+| train_interval |         Model       | AUC_ROC | AUC_PR | Dice_coeff |
+|      :---:     |         :---:       |  :---:  |  :---: |   :---:    |
+|        1       |       Pixel GAN     |         |        |            |
+|        1       | Patch GAN-1 (10x10) |         |        |            | 
+|        1       | Patch GAN-2 (80x80) |         |        |            | 
+|        1       |       Image GAN     |         |        |            | 
+|        100     |       Pixel GAN     |         |        |            |
+|        100     | Patch GAN-1 (10x10) |         |        |            |
+|        100     | patch GAN-2 (80x80) |         |        |            |
+|        100     |       Image GAN     |         |        |            |
+|        10000   |       Pixel GAN     |         |        |            |
+|        10000   | Patch GAN-1 (10x10) |         |        |            |
+|        10000   | patch GAN-2 (80x80) |         |        |            |
+|        10000   |       Image GAN     |         |        |            |
+
 
 ## Sampled Images in Training Process
 **From left to right: fundoscopic image, predicted vessel, and gold standard**
