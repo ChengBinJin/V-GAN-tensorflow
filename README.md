@@ -90,6 +90,7 @@ python main.py --is_test=True --discriminator=[pixel|patch1|patch2|image] --batc
 ## Evaluation
 
 ## Sampled images in training process
+**From left to right: fundoscopic image, predicted vessel, and gold standard**
 ![28400_222](https://user-images.githubusercontent.com/37034031/38590460-414827c0-3d6c-11e8-8ba8-6ffb8e6982da.png)  
 ![25000_193](https://user-images.githubusercontent.com/37034031/38590518-9dea9918-3d6c-11e8-9f6a-52041e9595db.png)
 
