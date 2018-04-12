@@ -1,6 +1,7 @@
 data/
 evaluation/
 codes/.idea/
+codes/Backup/
 codes/STARE/
 codes/DRIVE/
 codes/__pycache__/

@@ -109,9 +109,14 @@ def get_train_batch(train_img_files, train_vessel_files, train_indices, img_size
     assert (np.min(vessel_imgs) == 0 and np.max(vessel_imgs) == 1)
 
     # random mirror flipping
-    flip_index = np.random.choice(batch_size, int(np.ceil(0.5 * batch_size)), replace=False)
-    fundus_imgs[flip_index] = fundus_imgs[flip_index, :, ::-1, :]  # flipped imgs
-    vessel_imgs[flip_index] = vessel_imgs[flip_index, :, ::-1]  # flipped vessel
+    for idx in range(batch_size):
+        if np.random.random() > 0.5:
+            fundus_imgs[idx] = fundus_imgs[idx, :, ::-1, :]  # flipped imgs
+            vessel_imgs[idx] = vessel_imgs[idx, :, ::-1]  # flipped vessel
+
+    # flip_index = np.random.choice(batch_size, int(np.ceil(0.5 * batch_size)), replace=False)
+    # fundus_imgs[flip_index] = fundus_imgs[flip_index, :, ::-1, :]  # flipped imgs
+    # vessel_imgs[flip_index] = vessel_imgs[flip_index, :, ::-1]  # flipped vessel
 
     # random rotation
     for idx in range(batch_size):
@@ -486,7 +491,7 @@ def save_obj(true_vessel_arr, pred_vessel_arr, auc_roc_file_name, auc_pr_file_na
 def print_metrics(itr, kargs):
     print("*** Iteration {}  ====> ".format(itr))
     for name, value in kargs.items():
-        print("{} : {:.5}, ".format(name, value))
+        print("{} : {:.6}, ".format(name, value))
     print("")
     sys.stdout.flush()
 
