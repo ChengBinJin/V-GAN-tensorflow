@@ -100,9 +100,9 @@ python evaluation.py
 |        1       | Patch GAN-2 (80x80) | 0.9408  | 0.8257 |   0.7478   |
 |        1       |       Image GAN     | 0.9280  | 0.8241 |   0.7839   |
 |        100     |       Pixel GAN     |         |        |            |
-|        100     | Patch GAN-1 (10x10) |         |        |            |
-|        100     | patch GAN-2 (80x80) |         |        |            |
-|        100     |       Image GAN     |         |        |            |
+|        100     | Patch GAN-1 (10x10) | 0.9263  | 0.8159 |   0.7319   |
+|        100     | patch GAN-2 (80x80) | 0.9312  | 0.8373 |   0.7520   |
+|        100     |       Image GAN     | 0.9210  | 0.7883 |   0.7168   |
 |        10000   |       Pixel GAN     |         |        |            |
 |        10000   | Patch GAN-1 (10x10) |         |        |            |
 |        10000   | patch GAN-2 (80x80) |         |        |            |
