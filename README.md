@@ -93,36 +93,36 @@ python main.py --is_test=True --discriminator=[pixel|patch1|patch2|image] --batc
 python evaluation.py
 ```
 ### DRIVE dataset
-| train_interval |         Model       | AUC_ROC | AUC_PR | Dice_coeff |
-|      :---:     |         :---:       |  :---:  |  :---: |   :---:    |
-|        1       |       Pixel GAN     | 0.9049  | 0.8033 |   0.3020   |
-|        1       | Patch GAN-1 (10x10) | 0.9487  | 0.8431 |   0.7469   |
-|        1       | Patch GAN-2 (80x80) | 0.9408  | 0.8257 |   0.7478   |
-|        1       |       Image GAN     | 0.9280  | 0.8241 |   0.7839   |
-|        100     |       Pixel GAN     | 0.9298  | 0.8228 |   0.7766   |
-|        100     | Patch GAN-1 (10x10) | 0.9263  | 0.8159 |   0.7319   |
-|        100     | patch GAN-2 (80x80) | 0.9312  | 0.8373 |   0.7520   |
-|        100     |       Image GAN     | 0.9210  | 0.7883 |   0.7168   |
-|        10000   |       Pixel GAN     |         |        |            |
-|        10000   | Patch GAN-1 (10x10) | 0.9445  | 0.8680 |   0.7938   |
-|        10000   | patch GAN-2 (80x80) | 0.9525  | 0.8752 |   0.7957   |
-|        10000   |       Image GAN     | 0.9509  | 0.8537 |   0.7546   |
+| train_interval |         Model       |  AUC_ROC |  AUC_PR  | Dice_coeff |
+|      :---:     |         :---:       |   :---:  |   :---:  |   :---:    |
+|        1       |       Pixel GAN     |  0.9049  |  0.8033  |   0.3020   |
+|        1       | Patch GAN-1 (10x10) |  0.9487  |  0.8431  |   0.7469   |
+|        1       | Patch GAN-2 (80x80) |  0.9408  |  0.8257  |   0.7478   |
+|        1       |       Image GAN     |  0.9280  |  0.8241  |   0.7839   |
+|        100     |       Pixel GAN     |  0.9298  |  0.8228  |   0.7766   |
+|        100     | Patch GAN-1 (10x10) |  0.9263  |  0.8159  |   0.7319   |
+|        100     | patch GAN-2 (80x80) |  0.9312  |  0.8373  |   0.7520   |
+|        100     |       Image GAN     |  0.9210  |  0.7883  |   0.7168   |
+|        10000   |       Pixel GAN     |  0.9353  |  0.8692  |   0.7928   |
+|        10000   | Patch GAN-1 (10x10) |  0.9445  |  0.8680  |   0.7938   |
+|        10000   | patch GAN-2 (80x80) |**0.9525**|**0.8752**| **0.7957** |
+|        10000   |       Image GAN     |  0.9509  |  0.8537  |   0.7546   |
 
 ### STARE dataset
-| train_interval |         Model       | AUC_ROC | AUC_PR | Dice_coeff |
-|      :---:     |         :---:       |  :---:  |  :---: |   :---:    |
-|        1       |       Pixel GAN     |         |        |            |
-|        1       | Patch GAN-1 (10x10) |         |        |            | 
-|        1       | Patch GAN-2 (80x80) |         |        |            | 
-|        1       |       Image GAN     |         |        |            | 
-|        100     |       Pixel GAN     |         |        |            |
-|        100     | Patch GAN-1 (10x10) |         |        |            |
-|        100     | patch GAN-2 (80x80) |         |        |            |
-|        100     |       Image GAN     |         |        |            |
-|        10000   |       Pixel GAN     |         |        |            |
-|        10000   | Patch GAN-1 (10x10) |         |        |            |
-|        10000   | patch GAN-2 (80x80) |         |        |            |
-|        10000   |       Image GAN     |         |        |            |
+| train_interval |         Model       |  AUC_ROC |  AUC_PR  | Dice_coeff |
+|      :---:     |         :---:       |   :---:  |   :---:  |    :---:   |
+|        1       |       Pixel GAN     |  0.9368  |  0.8354  |   0.8063   |
+|        1       | Patch GAN-1 (10x10) |  0.9119  |  0.7199  |   0.6607   | 
+|        1       | Patch GAN-2 (80x80) |  0.9053  |  0.7998  |   0.7902   | 
+|        1       |       Image GAN     |  0.9074  |  0.7452  |   0.7198   | 
+|        100     |       Pixel GAN     |  0.8874  |  0.7056  |   0.6616   |
+|        100     | Patch GAN-1 (10x10) |  0.8787  |  0.6858  |   0.6432   |
+|        100     | patch GAN-2 (80x80) |  0.9306  |  0.8066  |   0.7321   |
+|        100     |       Image GAN     |  0.9099  |  0.7785  |   0.7117   |
+|        10000   |       Pixel GAN     |  0.9317  |  0.8255  |   0.8107   |
+|        10000   | Patch GAN-1 (10x10) |  0.9318  |  0.8378  | **0.8087** |
+|        10000   | patch GAN-2 (80x80) |**0.9604**|**0.8600**|   0.7867   |
+|        10000   |       Image GAN     |  0.9283  |  0.8395  |   0.8001   |
 
 
 ## Sampled Images in Training Process
