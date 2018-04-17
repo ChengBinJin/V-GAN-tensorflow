@@ -107,7 +107,7 @@ Results are generated in **evaluation** folder. Hierarchy of the folder is
 **comparison:** difference maps between V-GAN and gold standard  
 **measures:** AUC_ROC and AUC_PR curves  
 **vessels:** vessels superimposed on segmented masks  
-__Area Under the Curve__ (AUC), __Precision and Recall__ (PR), __Receiver Operating Characteristic__ (ROC)  
+*Area Under the Curve* (AUC), *Precision and Recall* (PR), *Receiver Operating Characteristic* (ROC)  
 
 ### DRIVE Results
 ![picture1](https://user-images.githubusercontent.com/37034031/38852786-1a271f2c-4256-11e8-8907-477bb298cc30.png)  
