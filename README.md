@@ -10,7 +10,7 @@ This repository is Tensorflow implementation of [Retinal Vessel Segmentation in 
 4. Add sampling function to check generated results to know what's going on
 5. Measurements are plotted on tensorboard in training process
 6. The code is written more structurally  
-**Note:** Area Under the Curve (AUC), Precision and Recall (PR), Receiver Operating Characteristic (ROC)
+__Area Under the Curve__ (AUC), __Precision and Recall__ (PR), __Receiver Operating Characteristic__ (ROC)
 
 ## Package Dependency
 - tensorflow 1.16.0
@@ -60,7 +60,7 @@ python main.py --train_interval=<int> --ratio_gan2seg=<int> --gpu_index=<int> --
 - models will be saved in './codes/{}/model\_{}\_{}\_{}'.format(dataset, disriminator, train_interval, batch_size)' folder, e.g., './codes/STARE/model_image_100_1' folder.  
 - smapled images will be saved in './codes/{}/sample_\_{}\_{}\_{}'.format(dataset, disriminator, train_interval, batch_size)', e.g., './codes/STARE/sample_image_100_1' folder.  
 
-### arguments
+### Arguments
 **train_interval:** training interval between discriminator and generator, default: 1    
 **ratio_gan2seg:** ratio of gan loss to seg loss, default: 10  
 **gpu_index:** gpu index, default: 0  
@@ -92,7 +92,30 @@ python main.py --is_test=True --discriminator=[pixel|patch1|patch2|image] --batc
 ```
 python evaluation.py
 ```
-### DRIVE dataset
+Results are generated in **evaluation** folder. Hierarchy of the folder is  
+```
+.
+├── DRIVE
+│   ├── comparison
+│   ├── measures
+│   └── vessels
+└── STARE
+    ├── comparison
+    ├── measures
+    └── vessels
+```
+**comparison:** difference maps between V-GAN and gold standard  
+**measures:** AUC_ROC and AUC_PR curves  
+**vessels:** vessels superimposed on segmented masks  
+__Area Under the Curve__ (AUC), __Precision and Recall__ (PR), __Receiver Operating Characteristic__ (ROC)  
+
+### DRIVE Results
+![picture1](https://user-images.githubusercontent.com/37034031/38852786-1a271f2c-4256-11e8-8907-477bb298cc30.png)  
+
+### STARE Results
+![picture2](https://user-images.githubusercontent.com/37034031/38852814-385daf6a-4256-11e8-918e-1301d3a788b0.png)
+
+### DRIVE Dataset
 | train_interval |         Model       |  AUC_ROC |  AUC_PR  | Dice_coeff |
 |      :---:     |         :---:       |   :---:  |   :---:  |   :---:    |
 |        1       |       Pixel GAN     |  0.9049  |  0.8033  |   0.3020   |
@@ -108,7 +131,7 @@ python evaluation.py
 |        10000   | patch GAN-2 (80x80) |**0.9525**|**0.8752**| **0.7957** |
 |        10000   |       Image GAN     |  0.9509  |  0.8537  |   0.7546   |
 
-### STARE dataset
+### STARE Dataset
 | train_interval |         Model       |  AUC_ROC |  AUC_PR  | Dice_coeff |
 |      :---:     |         :---:       |   :---:  |   :---:  |    :---:   |
 |        1       |       Pixel GAN     |  0.9368  |  0.8354  |   0.8063   |
@@ -124,13 +147,9 @@ python evaluation.py
 |        10000   | patch GAN-2 (80x80) |**0.9604**|**0.8600**|   0.7867   |
 |        10000   |       Image GAN     |  0.9283  |  0.8395  |   0.8001   |  
 
-**Note:** set higher training intervals between generator and discriminator, which can boost performance a little bit as paper mentioned. However, the mathematical theory behind this experimental results is not clear.  
-
-
-## Sampled Images in Training Process
-**From left to right: fundoscopic image, predicted vessel, and gold standard**
-![28400_222](https://user-images.githubusercontent.com/37034031/38590460-414827c0-3d6c-11e8-8ba8-6ffb8e6982da.png)  
-![25000_193](https://user-images.githubusercontent.com/37034031/38590518-9dea9918-3d6c-11e8-9f6a-52041e9595db.png)
+**Note:** 
+- Set higher training intervals between generator and discriminator, which can boost performance a little bit as paper mentioned. However, the mathematical theory behind this experimental results is not clear.
+- The performance of V-GAN Tensorflow implementation has a gap compared with [paper](https://arxiv.org/pdf/1706.09318.pdf). Without fully fine-tuning and subtle difference in implementations may be the reasons.
 
 ## Architectures
 - **Generator:**
@@ -159,7 +178,7 @@ python evaluation.py
 </p>
 
 ## Tensorboard
-AUC_ROC, AUC_PR, Dice_Coefficient, Accuracy, Sensitivity, and Specificity on validation dataset during training iterations  
+__AUC_ROC__, __AUC_PR__, __Dice_Coefficient__, __Accuracy__, __Sensitivity__, and __Specificity__ on validation dataset during training iterations  
 - **AUC_ROC:**
 <p align="center">
   <img src="https://user-images.githubusercontent.com/37034031/38844972-a47e2a92-4230-11e8-8eaf-48111e915046.png">
