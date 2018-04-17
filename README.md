@@ -1,5 +1,5 @@
 # V-GAN in Tensorflow
-This repository is Tensorflow implementation of [Retinal Vessel Segmentation in Fundoscopic Images with Generative Adversarial Networks](https://arxiv.org/pdf/1706.09318.pdf). The referenced keras code can be found [here](https://bitbucket.org/woalsdnd/v-gan/downloads/).
+This repository is Tensorflow implementation of [Retinal Vessel Segmentation in Fundoscopic Images with Generative Adversarial Networks](https://arxiv.org/pdf/1706.09318.pdf). The referenced keras code can be found [here](https://github.com/jaeminSon/V-GAN).
 
 ![figure01](https://user-images.githubusercontent.com/37034031/38225319-55f0c47c-372f-11e8-839d-a544b06edfc0.png)
 
@@ -114,6 +114,12 @@ Results are generated in **evaluation** folder. Hierarchy of the folder is
 
 ### STARE Results
 ![picture2](https://user-images.githubusercontent.com/37034031/38852814-385daf6a-4256-11e8-918e-1301d3a788b0.png)
+
+### Difference Maps  
+**DRIVE** (top), **STARE** (bottom)  
+Green marks correct segmentation while blue and red indicate false positive and false negative
+![picture3](https://user-images.githubusercontent.com/37034031/38869888-2c9efe8c-4287-11e8-933d-191dcf0a6f17.png)
+![picture4](https://user-images.githubusercontent.com/37034031/38869973-5ae4bf0c-4287-11e8-990f-929061a8e22c.png)
 
 ### DRIVE Dataset
 | train_interval |         Model       |  AUC_ROC |  AUC_PR  | Dice_coeff |
