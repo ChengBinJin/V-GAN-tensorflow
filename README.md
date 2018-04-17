@@ -122,7 +122,9 @@ python evaluation.py
 |        10000   |       Pixel GAN     |  0.9317  |  0.8255  |   0.8107   |
 |        10000   | Patch GAN-1 (10x10) |  0.9318  |  0.8378  | **0.8087** |
 |        10000   | patch GAN-2 (80x80) |**0.9604**|**0.8600**|   0.7867   |
-|        10000   |       Image GAN     |  0.9283  |  0.8395  |   0.8001   |
+|        10000   |       Image GAN     |  0.9283  |  0.8395  |   0.8001   |  
+
+**Note:** set higher training intervals between generator and discriminator, which can boost performance a little bit as paper mentioned. However, the mathematical theory behind this experimental results is not clear.  
 
 
 ## Sampled Images in Training Process
@@ -156,3 +158,36 @@ python evaluation.py
   <img src="https://user-images.githubusercontent.com/37034031/38476272-caaa2440-3be7-11e8-9b8c-124741d109e8.png" height="600" width="305">
 </p>
 
+## Tensorboard
+AUC_ROC, AUC_PR, Dice_Coefficient, Accuracy, Sensitivity, and Specificity on validation dataset during training iterations  
+- **AUC_ROC:**
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/37034031/38844972-a47e2a92-4230-11e8-8eaf-48111e915046.png">
+</p>
+
+- **AUC_PR:**
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/37034031/38845022-ef619b3e-4230-11e8-8cd4-10c3b1999c7c.png">
+</p>
+
+- **Dice_Coeffcient:**
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/37034031/38845105-3d37222a-4231-11e8-9110-43560ff1f77d.png">
+</p>
+
+- **Accuracy:**
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/37034031/38845129-5175d10a-4231-11e8-86d7-aec166107491.png">
+</p>
+
+- **Sensitivity:**
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/37034031/38845151-63e3b7f8-4231-11e8-9a56-bffbcf90550f.png">
+</p>
+
+- **Specificity:**
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/37034031/38845594-1e7f9400-4233-11e8-8e1f-ce4022833ea2.png">
+</p>
+
+  
