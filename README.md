@@ -10,7 +10,7 @@ This repository is Tensorflow implementation of [Retinal Vessel Segmentation in 
 4. Add sampling function to check generated results to know what's going on
 5. Measurements are plotted on tensorboard in training process
 6. The code is written more structurally  
-__Area Under the Curve__ (AUC), __Precision and Recall__ (PR), __Receiver Operating Characteristic__ (ROC)
+*Area Under the Curve* (AUC), *Precision and Recall* (PR), *Receiver Operating Characteristic* (ROC)
 
 ## Package Dependency
 - tensorflow 1.16.0
@@ -178,7 +178,7 @@ __Area Under the Curve__ (AUC), __Precision and Recall__ (PR), __Receiver Operat
 </p>
 
 ## Tensorboard
-__AUC_ROC__, __AUC_PR__, __Dice_Coefficient__, __Accuracy__, __Sensitivity__, and __Specificity__ on validation dataset during training iterations  
+*AUC_ROC*, *AUC_PR*, *Dice_Coefficient*, *Accuracy*, *Sensitivity*, and *Specificity* on validation dataset during training iterations  
 - **AUC_ROC:**
 <p align="center">
   <img src="https://user-images.githubusercontent.com/37034031/38844972-a47e2a92-4230-11e8-8eaf-48111e915046.png">
