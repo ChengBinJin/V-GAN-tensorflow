@@ -1,5 +1,5 @@
 # V-GAN in Tensorflow
-This repository is Tensorflow implementation of [Retinal Vessel Segmentation in Fundoscopic Images with Generative Adversarial Networks](https://arxiv.org/pdf/1706.09318.pdf). The referenced keras code can be found [here](https://bitbucket.org/woalsdnd/v-gan/downloads/).
+This repository is Tensorflow implementation of [Retinal Vessel Segmentation in Fundoscopic Images with Generative Adversarial Networks](https://arxiv.org/pdf/1706.09318.pdf). The referenced keras code can be found [here](https://github.com/jaeminSon/V-GAN).
 
 ![figure01](https://user-images.githubusercontent.com/37034031/38225319-55f0c47c-372f-11e8-839d-a544b06edfc0.png)
 
@@ -10,7 +10,7 @@ This repository is Tensorflow implementation of [Retinal Vessel Segmentation in 
 4. Add sampling function to check generated results to know what's going on
 5. Measurements are plotted on tensorboard in training process
 6. The code is written more structurally  
-**Note:** Area Under the Curve (AUC), Precision and Recall (PR), Receiver Operating Characteristic (ROC)
+*Area Under the Curve* (AUC), *Precision and Recall* (PR), *Receiver Operating Characteristic* (ROC)
 
 ## Package Dependency
 - tensorflow 1.16.0
@@ -60,7 +60,7 @@ python main.py --train_interval=<int> --ratio_gan2seg=<int> --gpu_index=<int> --
 - models will be saved in './codes/{}/model\_{}\_{}\_{}'.format(dataset, disriminator, train_interval, batch_size)' folder, e.g., './codes/STARE/model_image_100_1' folder.  
 - smapled images will be saved in './codes/{}/sample_\_{}\_{}\_{}'.format(dataset, disriminator, train_interval, batch_size)', e.g., './codes/STARE/sample_image_100_1' folder.  
 
-### arguments
+### Arguments
 **train_interval:** training interval between discriminator and generator, default: 1    
 **ratio_gan2seg:** ratio of gan loss to seg loss, default: 10  
 **gpu_index:** gpu index, default: 0  
@@ -92,7 +92,36 @@ python main.py --is_test=True --discriminator=[pixel|patch1|patch2|image] --batc
 ```
 python evaluation.py
 ```
-### DRIVE dataset
+Results are generated in **evaluation** folder. Hierarchy of the folder is  
+```
+.
+├── DRIVE
+│   ├── comparison
+│   ├── measures
+│   └── vessels
+└── STARE
+    ├── comparison
+    ├── measures
+    └── vessels
+```
+**comparison:** difference maps between V-GAN and gold standard  
+**measures:** AUC_ROC and AUC_PR curves  
+**vessels:** vessels superimposed on segmented masks  
+*Area Under the Curve* (AUC), *Precision and Recall* (PR), *Receiver Operating Characteristic* (ROC)  
+
+### DRIVE Results
+![picture1](https://user-images.githubusercontent.com/37034031/38852786-1a271f2c-4256-11e8-8907-477bb298cc30.png)  
+
+### STARE Results
+![picture2](https://user-images.githubusercontent.com/37034031/38852814-385daf6a-4256-11e8-918e-1301d3a788b0.png)
+
+### Difference Maps  
+**DRIVE** (top), **STARE** (bottom)  
+Green marks correct segmentation while blue and red indicate false positive and false negative
+![picture3](https://user-images.githubusercontent.com/37034031/38869888-2c9efe8c-4287-11e8-933d-191dcf0a6f17.png)
+![picture4](https://user-images.githubusercontent.com/37034031/38869973-5ae4bf0c-4287-11e8-990f-929061a8e22c.png)
+
+### DRIVE Dataset
 | train_interval |         Model       |  AUC_ROC |  AUC_PR  | Dice_coeff |
 |      :---:     |         :---:       |   :---:  |   :---:  |   :---:    |
 |        1       |       Pixel GAN     |  0.9049  |  0.8033  |   0.3020   |
@@ -108,7 +137,7 @@ python evaluation.py
 |        10000   | patch GAN-2 (80x80) |**0.9525**|**0.8752**| **0.7957** |
 |        10000   |       Image GAN     |  0.9509  |  0.8537  |   0.7546   |
 
-### STARE dataset
+### STARE Dataset
 | train_interval |         Model       |  AUC_ROC |  AUC_PR  | Dice_coeff |
 |      :---:     |         :---:       |   :---:  |   :---:  |    :---:   |
 |        1       |       Pixel GAN     |  0.9368  |  0.8354  |   0.8063   |
@@ -122,13 +151,11 @@ python evaluation.py
 |        10000   |       Pixel GAN     |  0.9317  |  0.8255  |   0.8107   |
 |        10000   | Patch GAN-1 (10x10) |  0.9318  |  0.8378  | **0.8087** |
 |        10000   | patch GAN-2 (80x80) |**0.9604**|**0.8600**|   0.7867   |
-|        10000   |       Image GAN     |  0.9283  |  0.8395  |   0.8001   |
+|        10000   |       Image GAN     |  0.9283  |  0.8395  |   0.8001   |  
 
-
-## Sampled Images in Training Process
-**From left to right: fundoscopic image, predicted vessel, and gold standard**
-![28400_222](https://user-images.githubusercontent.com/37034031/38590460-414827c0-3d6c-11e8-8ba8-6ffb8e6982da.png)  
-![25000_193](https://user-images.githubusercontent.com/37034031/38590518-9dea9918-3d6c-11e8-9f6a-52041e9595db.png)
+**Note:** 
+- Set higher training intervals between generator and discriminator, which can boost performance a little bit as paper mentioned. However, the mathematical theory behind this experimental results is not clear.
+- The performance of V-GAN Tensorflow implementation has a gap compared with [paper](https://arxiv.org/pdf/1706.09318.pdf). Without fully fine-tuning and subtle difference in implementations may be the reasons.
 
 ## Architectures
 - **Generator:**
@@ -156,3 +183,36 @@ python evaluation.py
   <img src="https://user-images.githubusercontent.com/37034031/38476272-caaa2440-3be7-11e8-9b8c-124741d109e8.png" height="600" width="305">
 </p>
 
+## Tensorboard
+*AUC_ROC*, *AUC_PR*, *Dice_Coefficient*, *Accuracy*, *Sensitivity*, and *Specificity* on validation dataset during training iterations  
+- **AUC_ROC:**
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/37034031/38844972-a47e2a92-4230-11e8-8eaf-48111e915046.png">
+</p>
+
+- **AUC_PR:**
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/37034031/38845022-ef619b3e-4230-11e8-8cd4-10c3b1999c7c.png">
+</p>
+
+- **Dice_Coeffcient:**
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/37034031/38845105-3d37222a-4231-11e8-9110-43560ff1f77d.png">
+</p>
+
+- **Accuracy:**
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/37034031/38845129-5175d10a-4231-11e8-86d7-aec166107491.png">
+</p>
+
+- **Sensitivity:**
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/37034031/38845151-63e3b7f8-4231-11e8-9a56-bffbcf90550f.png">
+</p>
+
+- **Specificity:**
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/37034031/38845594-1e7f9400-4233-11e8-8e1f-ce4022833ea2.png">
+</p>
+
+  
