@@ -13,7 +13,7 @@ This repository is Tensorflow implementation of [Retinal Vessel Segmentation in 
 *Area Under the Curve* (AUC), *Precision and Recall* (PR), *Receiver Operating Characteristic* (ROC)
 
 ## Package Dependency
-- tensorflow 1.16.0
+- tensorflow 1.6.0
 - python 3.5.3
 - numpy 1.14.2
 - matplotlib 2.0.2
